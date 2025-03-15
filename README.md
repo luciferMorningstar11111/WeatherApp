@@ -45,10 +45,8 @@ Use the ` git clone ` CLI to clone template directly  to your machine
    npm install d3
    npm install
 ```
-## Project Dev Steps
-
-1. Environment Setup
-   Create a env file on the root of project
+## Environment Setup
+###  Create a env file on the root of project
    PUT THIS INSIDE
 ```bash
 REACT_APP_WEATHER_API_KEY=your_openweathermap_api_key
