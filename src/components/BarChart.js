@@ -33,7 +33,6 @@ const BarChart = () => {
         }
     };
 
-
     useEffect(() => {
         fetchWeatherData();
     }, []);
