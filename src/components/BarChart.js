@@ -12,20 +12,19 @@ const BarChart = () => {
 
     const fetchWeatherData = async () => {
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${WeatherAPI}`);
+            const response = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${WeatherAPI}` // No units=metric, so temperature remains in Kelvin
+            );
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch weather data");
-            }
+            if (!response.ok) throw new Error("Failed to fetch weather data");
 
             const fetchedData = await response.json();
-            console.log("Fetched data:", fetchedData);
             setCountryName(fetchedData.name);
 
             const processedData = [
-                { name: "Temp", value: fetchedData.main.temp },
-                { name: "Humidity", value: fetchedData.main.humidity },
-                { name: "Pressure", value: fetchedData.main.pressure }
+                { name: "Temp (K)", value: fetchedData.main.temp }, // Temperature in Kelvin
+                { name: "Humidity (%)", value: fetchedData.main.humidity },
+                { name: "Pressure (hPa)", value: fetchedData.main.pressure }
             ];
 
             setData(processedData);
@@ -48,7 +47,7 @@ const BarChart = () => {
 
         const svg = d3.select(svgRef.current)
             .attr("width", "100%")
-            .attr("height", height)
+            .attr("height", height);
 
         svg.selectAll("*").remove();
 
@@ -69,17 +68,26 @@ const BarChart = () => {
             .attr("transform", `translate(${margin.left},0)`)
             .call(d3.axisLeft(yScale));
 
+        // Bars with Animation
         const bars = svg.selectAll("rect")
             .data(data)
             .enter()
             .append("rect")
             .attr("x", d => xScale(d.name))
-            .attr("y", d => yScale(d.value))
             .attr("width", xScale.bandwidth())
-            .attr("height", d => height - margin.bottom - yScale(d.value))
             .attr("fill", theme === "light" ? "steelblue" : "darkorange")
+            .attr("y", height - margin.bottom) // Start from bottom
+            .attr("height", 0) // Start from 0 height
+            .transition()
+            .duration(1000)
+            .attr("y", d => yScale(d.value))
+            .attr("height", d => height - margin.bottom - yScale(d.value));
+
+        // Tooltip on Hover
+        svg.selectAll("rect")
             .on("mouseover", function (event, d) {
                 d3.select(this).attr("fill", theme === "light" ? "darkblue" : "lightcoral");
+
                 d3.select("#tooltip")
                     .style("visibility", "visible")
                     .text(`${d.name}: ${d.value}`)
@@ -87,19 +95,26 @@ const BarChart = () => {
                     .style("top", event.pageY - 10 + "px");
             })
             .on("mouseout", function () {
-                d3.select(this).attr("fill", theme === "light" ? "steelblue" : "darkorange");
+                d3.select(this).transition().duration(300).attr("fill", theme === "light" ? "steelblue" : "darkorange");
                 d3.select("#tooltip").style("visibility", "hidden");
             });
 
+        // Labels with Fade-in Transition
         svg.selectAll("text.label")
             .data(data)
             .enter()
             .append("text")
             .attr("class", "label")
             .attr("x", d => xScale(d.name) + xScale.bandwidth() / 2)
-            .attr("y", d => yScale(d.value) - 5)
+            .attr("y", height - margin.bottom) // Start from bottom
+            .attr("opacity", 0) // Start invisible
             .attr("text-anchor", "middle")
-            .text(d => d.value);
+            .text(d => d.value)
+            .transition()
+            .duration(1000)
+            .attr("y", d => yScale(d.value) - 5)
+            .attr("opacity", 1); // Fade-in effect
+
     }, [data, theme]);
 
     const toggleTheme = () => {
