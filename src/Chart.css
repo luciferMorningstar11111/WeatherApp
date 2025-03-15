@@ -1,0 +1,86 @@
+svg {
+    max-width: 100%;
+    display: block;
+    background-color: rgb(239, 238, 238);
+    height: auto;
+}
+
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.chartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.chartContainer h2 {
+    margin-bottom: 20px;
+}
+
+.chartContainer button {
+    margin-top: 20px;
+}
+
+
+.checkWeatherContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.checkWeatherContainer h2 {
+    margin-bottom: 20px;
+}
+
+.checkWeatherContainer button {
+    margin-top: 20px;
+}
+
+.checkWeatherContainer input {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.checkWeatherContainer button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.checkWeatherContainer button:hover {
+    background-color: #0056b3;
+}
+
