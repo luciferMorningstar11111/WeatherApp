@@ -3,6 +3,8 @@
 ## 📌 Project Description
 This project is a **Weather Data Bar Chart** built using **React** and **D3.js**. It fetches real-time weather data from the **OpenWeatherMap API** and displays temperature, humidity, and pressure using an animated bar chart.
 
+![image](https://github.com/user-attachments/assets/352a021e-1586-48b4-858b-2ceec509d918)
+
 ## 🚀 Live Demo
 You can check out the live version here:  
 🔗 **[Weather App](https://weather-app-delta-liard-15.vercel.app/)**
