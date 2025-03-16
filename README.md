@@ -39,7 +39,7 @@ Use the ` git clone ` CLI to clone template directly  to your machine
 
 ### Install Dependencies
 
-1. You will need to setup Next js  [Next Js ](https://nextjs.org)
+1. You will need to setup d3.js
 
 ### Run project on local
 
