@@ -33,8 +33,8 @@ To spin up this example localy, follow these steps
 Use the ` git clone ` CLI to clone template directly  to your machine
 
 ```bash
- git clone https://github.com/yourusername/weather-visualization.git
- cd weather-visualization
+ git clone https://github.com/luciferMorningstar11111/WeatherApp.git
+ cd WeatherApp
 ```
 
 ### Install Dependencies
